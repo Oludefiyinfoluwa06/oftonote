@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { TextInput } from 'react-native';
 
 const InputBox = ({ placeholder, secureTextEntry, value, onChangeText }) => {

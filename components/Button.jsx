@@ -1,4 +1,3 @@
-import { router } from 'expo-router';
 import { TouchableOpacity, Text } from 'react-native'
 
 const Button = ({ title, onPress }) => {
