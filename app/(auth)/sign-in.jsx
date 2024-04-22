@@ -1,16 +1,24 @@
-import { View, Text, ScrollView, Image } from 'react-native';
+import { View, Text, ScrollView, Image, Alert } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import InputBox from '../../components/InputBox';
-import Button from '../../components/Button';
+import { Button } from '../../components/Button';
 import { router } from 'expo-router';
 import { useState } from 'react';
+import { useAuth } from '../../contexts/AuthProvider';
 
 const SignIn = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const handlePress = () => {
-        console.log('Email: ', email, 'Password:', password);
+    const { login } = useAuth();
+
+    const handlePress = async () => {
+        try {
+            await login(email, password);
+        } catch (error) {
+            console.log('Error logging in: ' + error);
+            Alert.alert('Error', 'An error occurred, please try again later');
+        }
     }
 
     return (
@@ -18,7 +26,7 @@ const SignIn = () => {
             <ScrollView contentContainerStyle={{ height: '100%' }}>
                 <View className='items-center justify-center gap-2 my-5'>
                     <Image
-                        source={require('../../assets/oftonote.png')}
+                        source={require('../../assets/images/logo.png')}
                         className='w-11 h-11'
                         resizeMode='contain'
                     />

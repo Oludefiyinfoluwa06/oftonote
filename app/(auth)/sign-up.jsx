@@ -1,16 +1,38 @@
-import { View, Text, ScrollView, Image } from 'react-native';
+import { View, Text, ScrollView, Image, Alert } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import InputBox from '../../components/InputBox';
-import Button from '../../components/Button';
+import { Button } from '../../components/Button';
 import { router } from 'expo-router';
 import { useState } from 'react';
+import { useAuth } from '../../contexts/AuthProvider';
 
 const SignUp = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const handlePress = () => {
-        console.log('Email: ', email, 'Password:', password);
+    const { signup } = useAuth();
+
+    const handlePress = async () => {
+        if (email === '' || password === '') {
+            return Alert.alert('Error', 'Input fields are empty');
+        }
+
+        const regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+        if (regex.test(email) === false) {
+            return Alert.alert('Error', 'Please, enter a valid email');
+        }
+
+        if (password.length < 8) {
+            return Alert.alert('Error', 'Password field must be 8 characters or more');
+        }
+        
+        try {
+            await signup(email, password);
+        } catch (error) {
+            console.log('Error signing up: ' + error);
+            Alert.alert('Error', 'An error occurred, please try again later');
+        }
     }
 
     return (
@@ -18,7 +40,7 @@ const SignUp = () => {
             <ScrollView contentContainerStyle={{ height: '100%' }}>
                 <View className='items-center justify-center gap-2 my-5'>
                     <Image
-                        source={require('../../assets/oftonote.png')}
+                        source={require('../../assets/images/logo.png')}
                         className='w-11 h-11'
                         resizeMode='contain'
                     />
@@ -26,16 +48,12 @@ const SignUp = () => {
                 <View>
                     <Text className='text-xl mb-4 text-center font-bold'>Create your account</Text>
                     <View className='mt-3'>
-                        <Text className='mb-2'>Username</Text>
-                        <InputBox placeholder='Enter your username' secureTextEntry={false} value={email} onChangeText={(text) => setEmail(text)} />
-                    </View>
-                    <View className='mt-3'>
                         <Text className='mb-2'>Email</Text>
-                        <InputBox placeholder='Enter your email' secureTextEntry={false} value={password} onChangeText={(text) => setPassword(text)} />
+                        <InputBox placeholder='Enter your email' secureTextEntry={false} value={email} onChangeText={(text) => setEmail(text)} />
                     </View>
                     <View className='my-4'>
                         <Text className='mb-2'>Password</Text>
-                        <InputBox placeholder='Enter your password' secureTextEntry={true} />
+                        <InputBox placeholder='Enter your password' value={password} onChangeText={(text) => setPassword(text)} secureTextEntry={true} />
                     </View>
 
                     <Button title='Sign up' onPress={handlePress} />
