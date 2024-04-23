@@ -6,12 +6,12 @@ import { FlatList, Text, View } from 'react-native';
 import { useState } from 'react';
 import EmptyNote from '../../components/EmptyNote';
 
-const home = () => {
+const Home = () => {
     const [notes, setNotes] = useState([]);
     const { currentUser, logout } = useAuth();
 
     const goToAdd = () => {
-        router.push('/add')
+        router.push('/add');
     }
 
     const handleLogout = async () => {
@@ -39,4 +39,4 @@ const home = () => {
     );
 }
 
-export default home;
+export default Home;

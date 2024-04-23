@@ -1,6 +1,6 @@
 import { TextInput } from 'react-native';
 
-const InputBox = ({ placeholder, secureTextEntry, value, onChangeText }) => {
+const InputBox = ({ placeholder, secureTextEntry, value, onChangeText, multiline }) => {
     return (
         <TextInput
             placeholder={placeholder}

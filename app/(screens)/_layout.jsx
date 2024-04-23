@@ -1,6 +1,6 @@
 import { Stack } from 'expo-router'
 
-const TabLayout = () => {
+const ScreenLayout = () => {
   return (
     <Stack>
       <Stack.Screen
@@ -15,4 +15,4 @@ const TabLayout = () => {
   );
 }
 
-export default TabLayout
+export default ScreenLayout
