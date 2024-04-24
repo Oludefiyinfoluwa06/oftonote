@@ -8,6 +8,7 @@ const InputBox = ({ placeholder, secureTextEntry, value, onChangeText, multiline
             secureTextEntry={secureTextEntry}
             value={value}
             onChangeText={onChangeText}
+            multiline={multiline}
         />
     );
 }

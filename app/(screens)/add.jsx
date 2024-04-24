@@ -1,57 +1,45 @@
+import { useState } from 'react';
 import { View, Text } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import RichTextEditor, { RichTextToolbar } from 'react-native-zss-rich-text-editor';
 
 import InputBox from '../../components/InputBox';
-import { useState } from 'react';
+import { Button } from '../../components/Button';
 
 const Add = () => {
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
 
-    const richTextEditorRef = useRef(null);
+    const handleAddNote = async () => {
+
+    }
 
     return (
         <SafeAreaView className='p-3'>
             <Text className='text-2xl font-bold mb-3'>Add a note</Text>
 
             <View>
-                <InputBox placeholder='Enter a title' secureTextEntry={false} value={title} onChangeText={(text) => setTitle(text)} />
-
-                <RichTextToolbar
-                    editor={richTextEditorRef}
-                    selectedIconTint="#2095F2"
-                    iconTint="#000"
-                    style={styles.richTextToolbar}
+                <InputBox 
+                    placeholder='Enter a title' 
+                    secureTextEntry={false} 
+                    value={title} 
+                    onChangeText={(text) => setTitle(text)} 
+                    multiline={false}
                 />
 
-                <RichTextEditor
-                    initialContentHTML=''
-                    ref={richTextEditorRef}
-                    onChangeText={setContent}
-                    style={styles.richTextEditor}
-                    editorStyle={styles.editorStyle}
-                />
+                <View className='mt-3'>
+                    <InputBox 
+                        placeholder='Enter a content' 
+                        secureTextEntry={false} 
+                        value={content} 
+                        onChangeText={(text) => setContent(text)} 
+                        multiline={true}
+                    />
+                </View>
+
+                <Button title='Add Note' onPress={handleAddNote} />
             </View>
         </SafeAreaView>
     );
 }
-
-const styles = StyleSheet.create({
-    richTextEditor: {
-        borderWidth: 1,
-        borderColor: 'gray',
-        borderRadius: 4,
-    },
-    richTextToolbar: {
-        borderBottomWidth: 1,
-        borderBottomColor: 'gray',
-    },
-    editorStyle: {
-        backgroundColor: '#fff',
-        padding: 8,
-        fontSize: 16,
-    },
-});
 
 export default Add;

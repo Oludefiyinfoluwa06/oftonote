@@ -35,11 +35,23 @@ const SignIn = () => {
                     <Text className='text-xl mb-4 text-center font-bold'>Login to your account</Text>
                     <View className='mt-3'>
                         <Text className='mb-2'>Email</Text>
-                        <InputBox placeholder='Enter your email' secureTextEntry={false} value={email} onChangeText={(text) => setEmail(text)} />
+                        <InputBox 
+                            placeholder='Enter your email' 
+                            secureTextEntry={false} 
+                            value={email} 
+                            onChangeText={(text) => setEmail(text)} 
+                            multiline={false}
+                        />
                     </View>
                     <View className='my-4'>
                         <Text className='mb-2'>Password</Text>
-                        <InputBox placeholder='Enter your password' secureTextEntry={true} value={password} onChangeText={(text) => setPassword(text)} />
+                        <InputBox 
+                            placeholder='Enter your password' 
+                            secureTextEntry={true} 
+                            value={password} 
+                            onChangeText={(text) => setPassword(text)} 
+                            multiline={false}
+                        />
                     </View>
 
                     <Button title='Login' onPress={handlePress} />
