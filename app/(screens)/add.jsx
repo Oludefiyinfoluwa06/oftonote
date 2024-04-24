@@ -4,13 +4,22 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import InputBox from '../../components/InputBox';
 import { Button } from '../../components/Button';
+import { useNoteContext } from '../../contexts/NotesContext';
+import { router } from 'expo-router';
 
 const Add = () => {
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
 
-    const handleAddNote = async () => {
+    const { addNote } = useNoteContext();
 
+    const handleAddNote = async () => {
+        try {
+            await addNote(title, content);
+            router.push('/home');
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     return (
@@ -26,7 +35,7 @@ const Add = () => {
                     multiline={false}
                 />
 
-                <View className='mt-3'>
+                <View className='my-3'>
                     <InputBox 
                         placeholder='Enter a content' 
                         secureTextEntry={false} 
