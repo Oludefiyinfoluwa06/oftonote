@@ -1,6 +1,6 @@
-import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "firebase/auth";
+import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut, getAuth } from "firebase/auth";
 import { createContext, useContext, useEffect, useState } from "react"
-import { auth } from "../firebase";
+// import { auth } from "../firebase";
 import { router } from "expo-router";
 
 export const AuthContext = createContext();
@@ -9,6 +9,8 @@ export const AuthProvider = ({ children }) => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [currentUser, setCurrentUser] = useState(false);
     const [loading, setLoading] = useState(false);
+
+    const auth = getAuth();
 
     const login = async (email, password) => {
         await signInWithEmailAndPassword(auth, email, password);

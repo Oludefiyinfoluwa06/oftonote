@@ -28,6 +28,7 @@ export const NoteProvider = ({ children }) => {
 
     const values = {
         getNotes,
+        getNote,
         addNote,
         updateNote,
         deleteNote

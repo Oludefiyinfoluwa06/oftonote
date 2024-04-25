@@ -43,10 +43,6 @@ const Home = () => {
         }
         getAllNotes();
     }, []);
-
-    const handleViewNote = (id) => {
-        router.push(`/${id}`);
-    }
     
     return (
         <SafeAreaView className='p-3'>
@@ -54,11 +50,9 @@ const Home = () => {
                 data={notes}
                 keyExtractor={item => item.id}
                 renderItem={({ item }) => (
-                    <TouchableOpacity className='mt-3 bg-slate-200 p-3 rounded-md space-y-2' onPress={() => handleViewNote(item.id)}>
+                    <TouchableOpacity className='mt-3 bg-slate-200 p-3 rounded-md space-y-2' onPress={() => router.push(`/${item.id}`)}>
                         <Text className='text-xl font-bold'>{item.title}</Text>
-                        <View className='truncate'>
-                            <Text>{item.content}</Text>
-                        </View>
+                        <Text numberOfLines={1} ellipsizeMode="tail">{item.content}</Text>
                     </TouchableOpacity>
                 )}
                 ListHeaderComponent={() => (
