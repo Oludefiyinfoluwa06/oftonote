@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { FlatList, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import Spinner from 'react-native-loading-spinner-overlay';
 import { router } from 'expo-router';
 
 import Header from '../../components/Header';
@@ -8,7 +9,6 @@ import EmptyNote from '../../components/EmptyNote';
 
 import { useAuth } from '../../contexts/AuthProvider';
 import { useNoteContext } from '../../contexts/NotesContext';
-import Spinner from 'react-native-loading-spinner-overlay';
 
 const Home = () => {
     const [notes, setNotes] = useState([]);
@@ -48,7 +48,7 @@ const Home = () => {
             }
         }
         getAllNotes();
-    }, [getNotes]);
+    }, [getNotes, setNotes]);
     
     return (
         <SafeAreaView className='p-3'>

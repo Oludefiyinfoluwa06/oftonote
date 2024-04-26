@@ -1,5 +1,5 @@
 import { createContext, useContext } from "react";
-import { addDoc, collection, doc, getDoc, getDocs, query, where } from "firebase/firestore";
+import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, query, where } from "firebase/firestore";
 import { db } from '../firebase';
 import { useAuth } from "./AuthProvider";
 
@@ -22,9 +22,11 @@ export const NoteProvider = ({ children }) => {
         return await addDoc(collection(db, 'notes'), { title, content, email: currentUser.email });
     }
     
-    const updateNote = () => { }
+    const updateNote = (id, title, content) => { }
     
-    const deleteNote = () => { }
+    const deleteNote = async (id) => {
+        return await deleteDoc(doc(db, 'notes', id));
+    }
 
     const values = {
         getNotes,

@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import { View, Text } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { router } from 'expo-router';
 
 import InputBox from '../../components/InputBox';
 import { Button } from '../../components/Button';
 import { useNoteContext } from '../../contexts/NotesContext';
-import { router } from 'expo-router';
+
+import { Ionicons } from '@expo/vector-icons';
 
 const Add = () => {
     const [title, setTitle] = useState('');
@@ -24,7 +26,10 @@ const Add = () => {
 
     return (
         <SafeAreaView className='p-3'>
-            <Text className='text-2xl font-bold mb-3'>Add a note</Text>
+            <View className='flex-row items-center justify-start gap-3 mb-3'>
+                <Ionicons name='arrow-back' size={25} onPress={() => router.back()} />
+                <Text className='text-2xl font-bold'>Add a note</Text>
+            </View>
 
             <View>
                 <InputBox 
