@@ -15,6 +15,10 @@ const ScreenLayout = () => {
         name='[id]'
         options={{ headerShown: false }}
       />
+      <Stack.Screen
+        name='edit/[id]'
+        options={{ headerShown: false }}
+      />
     </Stack>
   );
 }

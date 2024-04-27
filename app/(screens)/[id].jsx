@@ -31,13 +31,13 @@ const Note = () => {
             <View className='flex-row items-center justify-between'>
                 <View className='flex-row items-center justify-start gap-4'>
                     <Ionicons name='arrow-back' size={20} onPress={() => {
-                        router.back();
+                        router.push('/home');
                     }} />
                     <Text className='text-2xl font-bold'>{note.title}</Text>
                 </View>
                 <View className='flex-row items-center justify-end gap-4'>
                     <Ionicons name='pencil' size={20} onPress={() => {
-                        console.log('clicked');
+                        router.push(`/edit/${id}`);
                     }} />
                     <Ionicons name='trash' size={20} onPress={() => {
                         deleteNote(id);
